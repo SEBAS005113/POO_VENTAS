@@ -26,9 +26,9 @@ public class Cuentas {
         Arrays.sort(ventasOrdenadas);
         return ventasOrdenadas;
         }
-	public static double promedioVentasPorSemana(int[]ventas){
-		 double total = TotalVentasPorSemana(ventas);
-		 double promedio = Math.round(total/ventas.length);
+	public static int promedioVentasPorSemana(int[]ventas){
+		 int total = TotalVentasPorSemana(ventas);
+		 int promedio = Math.round(total/ventas.length);
 		 return promedio;
 		}
 	public static void imprimirVentas(int[] ventas) {
@@ -57,6 +57,19 @@ public class Cuentas {
 	    }
 	    return minimo;
 	}
+	public static int promedioMensual(int[][] ventas) {
+	    int totalVentas = 0;
+	    int cantidadVentas = 0;
+	    for (int semana = 0; semana < ventas.length; semana++) {
+	        for (int dia = 0; dia < ventas[semana].length; dia++) {
+	            totalVentas += ventas[semana][dia];
+	            cantidadVentas++;
+	            }
+	        }
+	    int promedio = Math.round(totalVentas / cantidadVentas);
+	    return promedio;
+	    }
+
 	public static void main(String[] args) {
 		int[][] ventas = ventasAleatorias();
 		for (int semana = 0; semana < 4; semana++) {
@@ -67,14 +80,16 @@ public class Cuentas {
             System.out.println("Total de ventas: " + totalVentas);
             int[] top_ventas = ventasMenorAMayor(ventasSemana);
             topDeVentas(top_ventas);
-            double promedio_semana = promedioVentasPorSemana(ventasSemana);
+            int promedio_semana = promedioVentasPorSemana(ventasSemana);
             System.out.println("El promedio de ventas en la semana fue de: " + promedio_semana);
             int maxima_venta = encontrarMaxVentas(ventasSemana);
             System.out.println("El valor maximo vendido fue de: " + maxima_venta);
             int minima_venta = encontrarMinVentas(ventasSemana);
             System.out.println("El valor mínimo vendido fue de: " + minima_venta + "\n");
-            
 			}
+		int promedio_mensual = promedioMensual(ventas);
+		System.out.println("El promedio de ventas mensual es de: " + promedio_mensual);
+		
 		}
     }
     
