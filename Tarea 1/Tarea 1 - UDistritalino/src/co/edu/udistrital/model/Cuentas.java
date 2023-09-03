@@ -13,12 +13,6 @@ public class Cuentas {
         }
         return ventas;
     }
-	public static void imprimirVentas(int[] ventas) {
-		System.out.println("Ventas diarias: " + Arrays.toString(ventas));
-		}
-	public static void topDeVentas(int[] ventas) {
-		System.out.println("Top de ventas: " + Arrays.toString(ventas));
-		}
 	public static int TotalVentasPorSemana(int[] ventas) {
 	    int total = 0;
 	    for (int i = 0; i < ventas.length; i++) {
@@ -32,16 +26,54 @@ public class Cuentas {
         Arrays.sort(ventasOrdenadas);
         return ventasOrdenadas;
         }
+	public static double promedioVentasPorSemana(int[]ventas){
+		 double total = TotalVentasPorSemana(ventas);
+		 double promedio = Math.round(total/ventas.length);
+		 return promedio;
+		}
+	public static void imprimirVentas(int[] ventas) {
+		System.out.println("Ventas diarias: " + Arrays.toString(ventas));
+		}
+	public static void topDeVentas(int[] ventas) {
+		System.out.println("Top de ventas: " + Arrays.toString(ventas));
+		}
+	public static int encontrarMaxVentas(int[] ventasSemana) {
+	    int maximo = ventasSemana[0];
+	    for (int i = 0; i < ventasSemana.length; i++) {
+	        int venta = ventasSemana[i];
+	        if (venta > maximo) {
+	            maximo = venta;
+	        }
+	    }
+	    return maximo;
+	}
+	public static int encontrarMinVentas(int[] ventasSemana) {
+	    int minimo = ventasSemana[0];
+	    for (int i = 0; i < ventasSemana.length; i++) {
+	        int venta = ventasSemana[i];
+	        if (venta < minimo) {
+	            minimo = venta;
+	        }
+	    }
+	    return minimo;
+	}
 	public static void main(String[] args) {
 		int[][] ventas = ventasAleatorias();
 		for (int semana = 0; semana < 4; semana++) {
 			int[] ventasSemana = ventas[semana];
-			System.out.println("Semana " + (semana + 1) + ":");
+			System.out.println("Semana " + (semana + 1) + ":" + "\n");
 			imprimirVentas(ventasSemana);
 			int totalVentas = TotalVentasPorSemana(ventasSemana);
             System.out.println("Total de ventas: " + totalVentas);
             int[] top_ventas = ventasMenorAMayor(ventasSemana);
             topDeVentas(top_ventas);
+            double promedio_semana = promedioVentasPorSemana(ventasSemana);
+            System.out.println("El promedio de ventas en la semana fue de: " + promedio_semana);
+            int maxima_venta = encontrarMaxVentas(ventasSemana);
+            System.out.println("El valor maximo vendido fue de: " + maxima_venta);
+            int minima_venta = encontrarMinVentas(ventasSemana);
+            System.out.println("El valor mínimo vendido fue de: " + minima_venta + "\n");
+            
 			}
 		}
     }
