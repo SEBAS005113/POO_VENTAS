@@ -8,7 +8,7 @@ public class Cuentas {
         Random venta_dia = new Random();
         for (int semana = 0; semana < 4; semana++) {
             for (int dia = 0; dia < 7; dia++) {
-                ventas[semana][dia] = venta_dia.nextInt(975901) + 25000;
+                ventas[semana][dia] = venta_dia.nextInt(974990) + 25000;
             }
         }
         return ventas;
