@@ -2,6 +2,8 @@ package co.edu.udistrital.model;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Directorio {
 	
 	private ArrayList<Persona> directorio;
@@ -49,6 +51,18 @@ public class Directorio {
 	public void add(Persona nuevaPersona) {
 		
 		directorio.add(nuevaPersona);
+	}
+
+	public int quitar(String nombre,String telefono) {
+		for (Persona persona : directorio) {
+			System.out.println("nombre: "+persona.getNombre());
+			if(persona.getTelefono().equals(telefono)) {
+				directorio.remove(persona);
+				return 1;
+			}
+		}
+		return 2;
+		
 	}
 
 }

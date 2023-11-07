@@ -1,5 +1,6 @@
 package co.edu.udistrital.controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +25,8 @@ public class Controller implements ActionListener{
 	public void asignarOyentes() {
 		vista.getPd().getLista_genero().addActionListener(this);
 		vista.getPr().getBtnCrear().addActionListener(this);
+		vista.getPr().getBtnEliminar().addActionListener(this);
+		vista.getPr().getBtnImagen().addActionListener(this);
 	}
 
 	@Override
@@ -41,8 +44,6 @@ public class Controller implements ActionListener{
 				}
 			}
 			
-			limpiarCampos();
-			
 			vista.getPd().getLista_personas().addActionListener(this);
 		}else if(comando.equals("LISTA2")) {
 			 String nombreBuscar= (String)vista.getPd().getLista_personas().getSelectedItem();
@@ -59,18 +60,20 @@ public class Controller implements ActionListener{
 			 vista.getPim().cambiarImagen(encontrada.getArchivoFoto());
 
 		}else if(comando.equals("CrearPersona")) {
-			String nombre=vista.getPr().getTxtnombre().toString();
-			String ciudad=vista.getPr().getTxtciudad().toString();
-			String telefono=vista.getPr().getTxtTel().toString();
-			String email=vista.getPr().getTxtemail().toString();
-			String imagen="m1";
-			String genero="Femenino";
-			System.out.println(vista.getPr().getName());
+			String nombre=vista.getPr().getTxtnombre().getText();
+			String ciudad=vista.getPr().getTxtciudad().getText();
+			String telefono=vista.getPr().getTxtTel().getText();
+			String email=vista.getPr().getTxtemail().getText();
+			String imagen="m2";
+			String genero=vista.getPd().getLista_genero().getSelectedItem().toString();
 			
-			Persona nuevaPersona=new Persona(nombre, genero, ciudad, telefono, email, genero);
+			System.out.println(genero);;
+			
+			Persona nuevaPersona=new Persona(nombre, genero, ciudad, telefono, email, imagen);
 			if(!nombre.equals("")&&!ciudad.equals("")&&!telefono.equals("")&&!email.equals("")&&!genero.equals("")&&!imagen.equals("")) {
 				JOptionPane.showMessageDialog(vista, "La persona fue creada con éxito");
 				datos.add(nuevaPersona);
+				limpiarCampos();
 			}else {
 				JOptionPane.showMessageDialog(vista, "Por favor digite todos los campos");
 			}
@@ -78,14 +81,23 @@ public class Controller implements ActionListener{
 				System.out.println("nombre: "+x.getNombre());
 			}
 			
-			String generoBuscar= (String)vista.getPd().getLista_genero().getSelectedItem();
-			for(Persona x: datos.getDirectorio()) {
-				if(x.getGenero().equals(generoBuscar)) {
-					vista.getPd().getLista_personas().addItem(x.getNombre());
+		}else if(comando.equals("EliminarPersona")) {
+			String nombre=vista.getPr().getTxtnombre().getText();
+			String telefono=vista.getPr().getTxtTel().getText();
+			
+			
+			int respuesta=JOptionPane.showConfirmDialog(vista, "¿Está seguro de eliminar a " + nombre+ "?");
+			if(respuesta==0) {
+				limpiarCampos();
+				int seElimino=datos.quitar(nombre, telefono);
+				if(seElimino==1) {
+					JOptionPane.showMessageDialog(vista, nombre+" fue eliminada.");
+				}else if(seElimino==2) {
+					JOptionPane.showMessageDialog(vista, nombre+" no fue encontrada para eliminar.");
 				}
 			}
 			
-			limpiarCampos();
+		}else if (comando.equals("BuscarImagen")) {
 			
 		}
 	}
@@ -95,6 +107,8 @@ public class Controller implements ActionListener{
 		 vista.getPr().getTxtTel().setText("");
 		 vista.getPr().getTxtemail().setText("");
 		 vista.getPim().cambiarImagen("");
+		 vista.getPd().getLista_genero().setSelectedIndex(0);
+		 
 	}
 }
 

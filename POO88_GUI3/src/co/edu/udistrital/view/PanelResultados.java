@@ -24,6 +24,8 @@ public class PanelResultados extends JPanel{
 	private JTextField txtTel;
 	private JLabel email1;
 	private JTextField txtemail;
+	private JLabel eImagen;
+	private JButton btnImagen;
 	private JButton btnCrear;
 	private JButton btnEliminar;
 	
@@ -49,30 +51,37 @@ public class PanelResultados extends JPanel{
 		enombre1=new JLabel("Nombre: ");
 		add(enombre1);
 		
-		txtnombre= new JTextField();
+		txtnombre= new JTextField("");
 		txtnombre.setActionCommand("nombre");
 		add(txtnombre);
 		
 		eciudad1= new JLabel("Ciudad: ");
 		add(eciudad1);
 		
-		txtciudad= new JTextField();
+		txtciudad= new JTextField("");
 		txtciudad.setActionCommand("ciudad");
 		add(txtciudad);
 		
 		etel1= new JLabel("Telefono: ");
 		add(etel1);
 		
-		txtTel= new JTextField();
+		txtTel= new JTextField("");
 		txtTel.setActionCommand("telefono");
 		add(txtTel);
 		
 		email1= new JLabel("Email: ");
 		add(email1);
 		
-		txtemail= new JTextField();
+		txtemail= new JTextField("");
 		txtemail.setActionCommand("email");
 		add(txtemail);
+		
+		eImagen= new JLabel("Imagen");
+		add(eImagen);
+		
+		btnImagen= new JButton("BUSCAR IMAGEN");
+		btnImagen.setActionCommand("BuscarImagen");
+		add(btnImagen);
 		
 		eblanco= new JLabel();
 		add(eblanco);
@@ -88,6 +97,23 @@ public class PanelResultados extends JPanel{
 		btnEliminar.setActionCommand("EliminarPersona");
 		add(btnEliminar);
 
+	}
+
+	public JLabel geteImagen() {
+		return eImagen;
+	}
+
+	public void seteImagen(JLabel eImagen) {
+		this.eImagen = eImagen;
+	}
+
+
+	public JButton getBtnImagen() {
+		return btnImagen;
+	}
+
+	public void setBtnImagen(JButton btnImagen) {
+		this.btnImagen = btnImagen;
 	}
 
 	public JButton getBtnCrear() {

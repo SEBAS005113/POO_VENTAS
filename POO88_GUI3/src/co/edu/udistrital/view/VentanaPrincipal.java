@@ -18,14 +18,6 @@ public class VentanaPrincipal extends JFrame{
 		getContentPane().setBackground(Color.ORANGE);
 		getContentPane().setLayout(new BorderLayout(10,10));
 		
-		inicializarComponentes();
-		
-		setResizable(true);
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-	
-	public void inicializarComponentes() {
 		pd = new PanelDatos();
 		getContentPane().add(pd, BorderLayout.NORTH);
 		
@@ -34,6 +26,16 @@ public class VentanaPrincipal extends JFrame{
 		
 		pim= new PanelImagen();
 		getContentPane().add(pim, BorderLayout.CENTER);
+		
+		inicializarComponentes();
+		
+		setResizable(true);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
+	public void inicializarComponentes() {
+		
 	}
 
 	public PanelDatos getPd() {
